@@ -1,4 +1,115 @@
+
+:root
+{
+  --text-render-color:#ff9d6a;
+  --wrapper-color: #cf5427;
+}
+#root{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+
+
+}
+*
+{
+  font-family: Arial;
+}
+@media screen and (min-width: 1024px)
+{
+
+}
 .App {
   text-align: center;
-}
+  height: 100vh;
 
+}
+#app-wrapper{
+  background: #686466 ;
+  padding: 10px;
+  display: flex;
+  width: 100vw;
+  border: 1px solid black;
+  overflow: hidden;
+
+}
+#description
+{
+margin-bottom: 10px;
+}
+#editor-wrapper
+{
+  padding: 1%;
+  width: 30%;
+  height: 100%;
+  background: var(--wrapper-color);
+  border: 1px solid black;
+  overflow: hidden;
+
+
+}
+#preview-wrapper
+{
+  padding: 1%;
+  width: 70%;
+  margin-left: 10px;
+  height: 100%;
+  background: var(--wrapper-color);
+  border: 1px solid black;
+
+}
+#editor-wrapper textarea
+{
+  width: 100%;
+  height: 90%;
+  resize: vertical;
+  background: var(--text-render-color);
+  border: 1px solid black;
+  user-select: none;
+
+  }
+#editor-wrapper textarea:focus {
+  outline: none;
+
+}
+#editor-wrapper h1
+{
+  margin-bottom: 10px;
+}
+#preview
+{
+  margin-top: 40px;
+  height: 90%;
+  background: var(--text-render-color);
+  border: 1px solid black;
+
+}
+#preview *
+{
+  margin-left: 10px;
+}
+@media screen and (max-width: 479px) {
+  /* Ajustes para dispositivos con ancho de pantalla menor a 1024px (celulares y tablets) */
+
+  #app-wrapper {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  #editor-wrapper, #preview-wrapper {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+
+  }
+
+  #editor-wrapper
+  {
+    height: 50%;
+  }
+
+
+  /* Puedes seguir ajustando otros estilos para que se vean mejor en dispositivos móviles */
+}

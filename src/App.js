@@ -1,40 +1,67 @@
 import './App.css';
-import {useState} from "react";
-import {marked, use} from 'marked';
-// or const { marked } = require('marked');
+import { useState } from "react";
+import {marked} from 'marked';
 
-const html = marked.parse('# Marked in Node.js\n\nRendered by **marked**.');
+const initialMarkdown = `
+# Ejemplo de Markdown
+
+## Encabezados
+
+### Títulos
+
+### Listas ordenadas
+
+1. Elemento 1
+2. Elemento 2
+3. Elemento 3
+`
+
 
 
 function App() {
+    const [textInput, setTextInput] = useState(initialMarkdown);
+    const [markedText, setMarkedText] = useState(marked.parse(initialMarkdown));
 
-    const [textInput , setTextInput] = useState("")
-    const [markedText,setMarkedText] = useState("")
-
-    function handleChange(event)
-    {
-
-        setTextInput(event.target.value)
-        setMarkedText(marked.parse(event.target.value))
+    function handleKeyPressed(event) {
+        const tecla = event.keyCode;
+        console.log(tecla);
+        if (tecla === 13) {
+            const textoNuevo = textInput + "\n";
+            setTextInput(textoNuevo);
+            setMarkedText(marked.parse(textoNuevo));
+        }
     }
 
-    return <div>
-        <section id={"editor-wrapper"}>
-            <h1> Escribe algo</h1>
-            <textarea onChange={handleChange} id = "editor"></textarea>
-        </section>
+    function handleChange(event) {
+        const newText = event.target.value;
+        setTextInput(newText);
+        setMarkedText(marked.parse(newText));
+    }
 
-        <hr/>
-        <section>
-            <h1>Output</h1>
-            <div dangerouslySetInnerHTML={{ __html: markedText }}></div>
+    return (
+        <div id={"app-wrapper"}>
+            <section id={"header"}></section>
+            <section id="editor-wrapper">
+                <div id={"description"}>
+                    <h1>Markdown Previewer</h1>
+                    <p>by lucioggm</p>
+                </div>
+                <textarea
+                    value={textInput}
+                    onKeyDown={handleKeyPressed}
+                    onChange={handleChange}
+                    id="editor"
+                ></textarea>
+            </section>
 
-        </section>
+            <hr />
 
-
-
-
-    </div>
+            <section id={"preview-wrapper"}>
+                <h1>Output</h1>
+                <div id={"preview"} dangerouslySetInnerHTML={{ __html: markedText }}></div>
+            </section>
+        </div>
+    );
 }
 
 export default App;
